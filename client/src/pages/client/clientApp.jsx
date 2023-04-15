@@ -1,1 +1,0 @@
-//CLIENT APPLICATION - СОЗДАНИЕ ЗАЯВКИ КЛИЕНТОМ
