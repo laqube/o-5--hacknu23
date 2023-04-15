@@ -1,3 +1,4 @@
+//РЕГИСТРАЦИЯ КЛИЕНТОВ
 import React from "react";
 
 function Registration() {

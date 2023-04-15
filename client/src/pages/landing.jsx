@@ -1,6 +1,7 @@
+//ЛЕНДИНГ СО ВХОДОМ
 import React from "react";
 
-function Home() {
+function Landing() {
     return (
       <div>
         <h2>Welcome to my App!</h2>
@@ -8,5 +9,5 @@ function Home() {
       </div>
     );
   }
-  export {  Home  };
+  export {  Landing  };
   
