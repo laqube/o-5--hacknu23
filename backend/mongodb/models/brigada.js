@@ -1,15 +1,14 @@
 import mongoose from "mongoose";
 
-const PropertySchema = new mongoose.Schema({
-    title: { type: String, required: true },
-    description: { type: String, required: true },
-    propertyType: { type: String, required: true },
-    location: { type: String, required: true },
-    price: { type: Number, required: true },
-    photo: { type: String, required: true },
-    creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+const BrigadaSchema = new mongoose.Schema({
+    password:{ type: String, required: true },
+    role:{ type: String, required: true },
+    name: { type: String, required: true },
+    email: { type: String, required: true },
+    avatar: { type: String, required: true },
+    allOrders: [{ type: mongoose.Schema.Types.ObjectId, ref: "Order" }],
 });
 
-const propertyModel = mongoose.model("Brigada", PropertySchema);
+const brigadaModel = mongoose.model("Brigada", BrigadaSchema);
 
-export default propertyModel;
+export default brigadaModel;

@@ -14,7 +14,7 @@ const createOper = async (req, res) => {
     try {
         const { name, email, avatar } = req.body;
 
-        const operExists = await User.findOne({ email });
+        const operExists = await Oper.findOne({ email });
 
         if (operExists) return res.status(200).json(operExists);
 
@@ -34,10 +34,10 @@ const getOperInfoByID = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const oper = await Oper.findOne({ _id: id }).populate("allProperties");
+        const oper = await Oper.findOne({ _id: id }).populate("allOpers");
 
         if (oper) {
-            res.status(200).json(user);
+            res.status(200).json(oper);
         } else {
             res.status(404).json({ message: "Oper not found" });
         }
