@@ -66,6 +66,15 @@ const services = [
     image: serviceImage3,
   },
 ];
+const footerStyle = {
+  backgroundColor: '#312A1D',
+  color: '#fff',
+  height: '50px',
+  textAlign: 'center',
+  left: '0',
+  bottom: '0',
+  width: '100%',
+};
 
 function Landing() {
   
@@ -120,6 +129,9 @@ function Landing() {
 
             </Grid>
           </Container>
+          <div style={footerStyle}>
+            
+          </div>
         </ThemeProvider>
       </div>
     );
