@@ -1,10 +1,11 @@
 // ВХОД В АКК
 import React from "react";
-import Header from "../components/header"
+
 
 function Login() {
   return (
     <div>
+
       <h2>Login Page</h2>
       {/* form for login */}
     </div>
