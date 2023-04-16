@@ -1,49 +1,61 @@
 import Client from "../mongodb/models/client.js";
 
-const getAllClients = async (req, res) => {
+export const createClient = async (req, res) => {
+    const { name, email, password, role } = req.body;
+    const newClient = new Client({
+      name,
+      email,
+      password,
+      role,
+    });
     try {
-        const clients = await Client.find({}).limit(req.query._end);
-
-        res.status(200).json(clients);
+      const savedClient = await newClient.save();
+      res.status(201).json(savedClient);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      res.status(409).json({ message: error.message });
     }
+  };
+  
+
+export const getClientInfoByID = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const client = await Client.findById(id);
+    res.status(200).json(client);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
 };
 
-const createClient = async (req, res) => {
-    try {
-        const { name, email, avatar } = req.body;
+export const updateClient = async (req, res) => {
+  const { id } = req.params;
+  const { name, email, password, role } = req.body;
 
-        const clientExists = await Client.findOne({ email });
-
-        if (clientExists) return res.status(200).json(clientExists);
-
-        const newClient = await Client.create({
-            name,
-            email,
-            avatar,
-        });
-
-        res.status(200).json(newClient);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+  try {
+    const updatedClient = { name, email, password, role, _id: id };
+    await Client.findByIdAndUpdate(id, updatedClient, { new: true });
+    res.status(200).json(updatedClient);
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
 };
 
-const getClientInfoByID = async (req, res) => {
-    try {
-        const { id } = req.params;
+export const deleteClient = async (req, res) => {
+  const { id } = req.params;
 
-        const client = await Client.findOne({ _id: id }).populate("allOrders");
-
-        if (client) {
-            res.status(200).json(client);
-        } else {
-            res.status(404).json({ message: "Client not found" });
-        }
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+  try {
+    await Client.findByIdAndRemove(id);
+    res.status(200).json({ message: "Client deleted successfully." });
+  } catch (error) {
+    res.status(409).json({ message: error.message });
+  }
 };
 
-export { getAllClients, createClient, getClientInfoByID };
+export const getAllClients = async (req, res) => {
+  try {
+    const clients = await Client.find();
+    res.status(200).json(clients);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};

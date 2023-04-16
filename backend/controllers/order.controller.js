@@ -1,4 +1,4 @@
-import Order from "../mongodb/models/order";
+import Order from "../mongodb/models/order.js";
 import Client from "../mongodb/models/client.js";
 
 import mongoose from "mongoose";
